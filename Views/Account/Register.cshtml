@@ -1,0 +1,98 @@
+﻿@model BookReviewApp.Models.User
+
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f2f7f5; /* Light background */
+        font-family: Arial, sans-serif;
+    }
+
+    .register-box {
+        background-color: #d4edda; /* Light green */
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 350px;
+        text-align: center;
+    }
+
+        .register-box h2 {
+            margin-bottom: 20px;
+            color: #155724; /* Dark green */
+        }
+
+    .form-group {
+        margin-bottom: 15px;
+        text-align: left;
+    }
+
+    label {
+        font-weight: bold;
+        color: #155724; /* Dark green */
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #c3e6cb;
+        border-radius: 5px;
+        margin-top: 5px;
+        font-size: 16px;
+    }
+
+        input:focus {
+            outline: none;
+            border-color: #28a745;
+            box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+        }
+
+    .error-message {
+        color: red;
+        font-size: 14px;
+    }
+
+    button {
+        background-color: #28a745; /* Green */
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        font-size: 18px;
+        cursor: pointer;
+        width: 100%;
+        transition: background 0.3s ease;
+    }
+
+        button:hover {
+            background-color: #218838; /* Darker green */
+        }
+</style>
+
+<div class="register-box">
+    <h2>Register</h2>
+    <form asp-action="Register" method="post">
+        <div class="form-group">
+            <label asp-for="Username"></label>
+            <input asp-for="Username" />
+            <span asp-validation-for="Username" class="error-message"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" />
+            <span asp-validation-for="Email" class="error-message"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Password"></label>
+            <input asp-for="Password" type="password" />
+            <span asp-validation-for="Password" class="error-message"></span>
+        </div>
+
+        <button type="submit">Register</button>
+    </form>
+</div>
+
