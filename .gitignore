@@ -1,0 +1,58 @@
+# Visual Studio specific
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build output
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+*.log
+*.cache
+*.csproj.user
+
+# ASP.NET specific
+wwwroot/node_modules/
+wwwroot/lib/
+node_modules/
+dist/
+bower_components/
+
+# Logs & database
+*.log
+logs/
+app.db
+app.db-journal
+*.sqlite
+*.sqlite3
+*.db-shm
+*.db-wal
+
+# Entity Framework Migrations
+Migrations/
+
+# Publish output
+publish/
+out/
+
+# Rider IDE
+.idea/
+*.iml
+
+# JetBrains Rider temp files
+.idea/
+*.sln.iml
+
+# Secrets & Config files
+secrets.json
+.env
+appsettings.Development.json
+
+# Other
+*.swp
+*.bak
+*.tmp
