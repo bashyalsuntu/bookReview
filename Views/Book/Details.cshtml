@@ -1,0 +1,197 @@
+﻿@model BookReviewApp.Models.Book
+
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="container book-details">
+    <div class="row">
+        <!-- Left Column for Book Details -->
+        <div class="col-md-6">
+            <h1 class="book-title">@Model.Title</h1>
+            <p><strong>Author:</strong> @Model.Author</p>
+            <p><strong>Genre:</strong> @Model.Genre</p>
+            <p class="book-description">@Model.Description</p>
+            <p><strong>Average Rating:</strong> <span class="rating">@Model.AverageRating</span></p>
+
+            <h3 class="section-title">Reviews</h3>
+            <div class="reviews-container">
+                @if (Model.Reviews.Any())
+                {
+                    @foreach (var review in Model.Reviews)
+                    {
+                        <div class="review">
+                            <p><strong>@review.UserName:</strong> @review.Comment</p>
+                            <p class="rating-text">⭐ Rating: @review.Rating</p>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p class="no-reviews">No reviews yet. Be the first to review!</p>
+                }
+            </div>
+        </div>
+
+        <!-- Right Column for Add Review Form -->
+        <div class="col-md-6">
+            <h3 class="section-title">Add a Review</h3>
+            <form method="post" asp-action="AddReview" asp-route-bookId="@Model.Id" class="review-form">
+                
+                <div class="form-group">
+                    <label for="Comment"><i class="fas fa-comment"></i> Comment</label>
+                    <textarea class="form-control review-textarea" id="Comment" name="Comment" rows="4" placeholder="Write your review here..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="Rating"><i class="fas fa-star"></i> Rating</label>
+                    <select class="form-control review-select" id="Rating" name="Rating" required>
+                        <option value="">Select a rating</option>
+                        <option value="5">⭐⭐⭐⭐⭐ - Excellent</option>
+                        <option value="4">⭐⭐⭐⭐ - Very Good</option>
+                        <option value="3">⭐⭐⭐ - Good</option>
+                        <option value="2">⭐⭐ - Fair</option>
+                        <option value="1">⭐ - Poor</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn submit-btn">Submit Review</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Container Styling */
+    .book-details {
+        padding: 30px;
+        background-color: #f7f7f7;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .book-title {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #155724; /* Dark green */
+        text-align: left;
+    }
+
+    .book-description {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+    }
+
+    .rating {
+        font-size: 1.3rem;
+        color: #155724;
+        font-weight: bold;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+        color: #155724;
+        margin-top: 30px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #155724;
+    }
+
+    /* Left Column (Book Info) */
+    .book-info {
+        background-color: #e9f5ec; /* Light green */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Right Column (Review Form) */
+    .review-form {
+        background-color: #e9f5ec;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .review-input, .review-textarea, .review-select {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #28a745;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        transition: all 0.3s ease-in-out;
+    }
+
+        .review-input:focus, .review-textarea:focus, .review-select:focus {
+            border-color: #218838;
+            box-shadow: 0 0 8px rgba(40, 167, 69, 0.5);
+            outline: none;
+        }
+
+    .review-select {
+        background-color: #fff;
+    }
+
+    .submit-btn {
+        background-color: #28a745;
+        border: none;
+        color: white;
+        padding: 12px 20px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        border-radius: 8px;
+        width: 100%;
+        cursor: pointer;
+        transition: background 0.3s ease-in-out;
+    }
+
+        .submit-btn:hover {
+            background-color: #218838;
+        }
+
+    /* Review Card Styling */
+    .reviews-container {
+        margin-top: 20px;
+        padding: 20px;
+        background-color: #e9f5ec;
+        border-radius: 10px;
+    }
+
+    .review {
+        background-color: white;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+        .review p {
+            margin: 5px 0;
+        }
+
+    .rating-text {
+        color: #155724;
+        font-weight: bold;
+    }
+
+    .no-reviews {
+        font-style: italic;
+        color: #666;
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap; /* Allows items to wrap if needed */
+        margin-right: -15px; /* Negative margin to adjust for column padding */
+        margin-left: -15px; /* Negative margin to adjust for column padding */
+    }
+
+    .col-md-6 {
+        width: 48%; /* 50% width for medium-sized screens (like col-md-6 in Bootstrap) */
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+</style>
+
+
